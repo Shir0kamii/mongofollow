@@ -18,7 +18,7 @@ def filter_duplicates(cursor, ids):
             yield doc
 
 
-def mongotail(collection, filter=None):
+def mongofollow(collection, filter=None):
     if filter is None:
         filter = {}
     last_oid_generation_time = None
