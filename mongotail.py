@@ -1,4 +1,8 @@
+"""Tail any mongodb collection"""
+
 from bson import ObjectId
+
+__version__ = "0.1.0"
 
 
 def fetch(collection, filter, last_oid_generation_time=None):
