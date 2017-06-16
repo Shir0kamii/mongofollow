@@ -31,3 +31,11 @@ def test_stream(clean_collection):
         j = doc["i"]
         assert i == j
         clean_collection.insert({"i": i + 1})
+
+
+@pytest.mark.xfail(reason="todo", strict=True)
+def test_number(collection_range100):
+    for i, doc in zip(range(50, 100),
+                      mongofollow(collection_range100, number=50)):
+        j = doc["i"]
+        assert i == j
