@@ -10,5 +10,5 @@ env:
     secure: ken5BcGtj9fbxVmGCr/fSW58UtxXowY6fMXMakrbXC36tVT4o4AQcOdJr4FqXkMqAuIcKN9SA71l+W/Rj9wYKdxI/I0rMKGEk/P87q3HkSlXw2tiU8uWfutyJXIvOLj/2M6iLOsYIdc2Vh/m6rf0oev0XVAbq1tUuCzaq2HbfHCOVGbGPO/0hdGRn9zl7ViuNa+O//4Zj71Cb0EKUUL5yTvi7yNHhL7F+zghaoGRxHc+631i2ALH3zYMfgRgx78IAKb+UMtE2O+lZPBhOeS+Sn83hbRm4jo/aFlwpzBAaiGhcW4IWeRR4SHKZ+k7GXE+49STlEfU5DcphIqWlKpmlBUbU/gnsA6ZLSj+0U1ezPv+FLP1klEUMYNXARmfxTbbhyr43OsIpyT46IrkMUAxsMPu9+d4xqmGfXh8PL+GUGLRHKT+cfSTaqo3rk0OvjMCH0/sgwYODU5F/I6qSGKlw1Xfn5SHVPoVN0dbkMxduRyt517uwYx9ywtQRnSoKXBrgQIHIJVhALsJvKqP30O7hZAuWsIcmHWu+ZqA1/dDybZxp/HitoJ2O2s9bErCBmlpSSS/V+Jf43TmBPc/RurTAHf935kI0wKIybV0ZX91xjhaU6hkjAk7NVau1dwUD40AgjFVrw+LWxJgf4MNxWeEYX0MS7Z8ycR1W6kON01k5GE=
 before_install: pip install flit
 install: flit install --deps all
-script: true
+script: py.test
 after_success: "./autopublish.sh"
