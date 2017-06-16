@@ -2,7 +2,7 @@
 
 from bson import ObjectId
 
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 
 
 def fetch(collection, filter, last_oid_generation_time=None):
