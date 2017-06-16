@@ -23,7 +23,6 @@ def test_inserted(collection_range100):
     assert set(range(100)) == set(collection_range100.distinct("i"))
 
 
-@pytest.mark.xfail(reason="to fix")
 def test_stream(clean_collection):
     assert clean_collection.count() == 0
     clean_collection.insert({"i": 0})
