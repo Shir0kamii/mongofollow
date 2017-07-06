@@ -1,4 +1,6 @@
-import mongomock
+import os
+
+from pymongo import MongoClient
 import pytest
 
 from mongofollow import mongofollow
@@ -6,7 +8,8 @@ from mongofollow import mongofollow
 
 @pytest.fixture
 def clean_collection():
-    collection = mongomock.MongoClient().test.test
+    uri = os.environ.get("MONGO_HOST", "mongodb://localhost/test")
+    collection = MongoClient(uri).test.test
     collection.drop()
     return collection
 
@@ -26,8 +29,15 @@ def test_inserted(collection_range100):
 def test_stream(clean_collection):
     assert clean_collection.count() == 0
     clean_collection.insert({"i": 0})
-    for i, doc in zip(range(10), mongofollow(clean_collection)):
-        print(i, doc)
-        j = doc["i"]
-        assert i == j
-        clean_collection.insert({"i": i + 1})
+    i = 0
+    for doc in mongofollow(clean_collection):
+        assert i == doc["i"]
+        i+= 1
+        clean_collection.insert({"i": doc["i"] + 1})
+        if i >= 20:
+            break
+    # for i, doc in zip(range(10), mongofollow(clean_collection)):
+        # print(i, doc)
+        # j = doc["i"]
+        # assert i == j
+        # clean_collection.insert({"i": i + 1})
