@@ -22,13 +22,13 @@ def mongofollow(collection, filter=None):
     if filter is None:
         filter = {}
     last_oid_generation_time = None
-    last_oids = {}
+    last_oids = set()
     while True:
         cursor = fetch(collection, filter, last_oid_generation_time)
         for doc in filter_duplicates(cursor, last_oids):
             oid = doc["_id"]
             last_oid_generation_time = doc["_id"].generation_time
-            last_oids = {oid for oid in last_oids if
-                         oid.generation_time ==last_oid_generation_time}
             last_oids.add(oid)
             yield doc
+        last_oids = {oid for oid in last_oids if
+                     oid.generation_time == last_oid_generation_time}
