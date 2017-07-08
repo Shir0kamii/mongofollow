@@ -1,5 +1,7 @@
 """Tail any mongodb collection"""
 
+from time import sleep
+
 from bson import ObjectId
 
 __version__ = "1.0.1"
@@ -18,7 +20,7 @@ def filter_duplicates(cursor, ids):
             yield doc
 
 
-def mongofollow(collection, filter=None):
+def mongofollow(collection, filter=None, sleep_duration=0.1):
     if filter is None:
         filter = {}
     last_oid_generation_time = None
@@ -32,3 +34,4 @@ def mongofollow(collection, filter=None):
             yield doc
         last_oids = {oid for oid in last_oids if
                      oid.generation_time == last_oid_generation_time}
+        sleep(sleep_duration)

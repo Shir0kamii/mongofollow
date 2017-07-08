@@ -1,4 +1,5 @@
 import os
+import time
 
 from pymongo import MongoClient
 import pytest
@@ -41,3 +42,15 @@ def test_stream(clean_collection):
         # j = doc["i"]
         # assert i == j
         # clean_collection.insert({"i": i + 1})
+
+
+def test_sleep(clean_collection, mocker):
+    mocker.patch.object(time, "sleep")
+    clean_collection.insert({"i": 0})
+    iterator = mongofollow(clean_collection, sleep_duration=0.1)
+    doc = next(iterator)
+    assert doc["i"] == 0
+    clean_collection.insert({"i": 1})
+    doc = next(iterator)
+    assert doc["i"] == 1
+    time.sleep.called_with(0.1)
