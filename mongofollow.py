@@ -4,7 +4,7 @@ from time import sleep
 
 from bson import ObjectId
 
-__version__ = "1.0.1"
+__version__ = "1.1.0"
 
 
 def fetch(collection, filter, last_oid_generation_time=None):
